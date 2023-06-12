@@ -1,0 +1,1 @@
+enum ViewModelState { initial, loading, ready, error }

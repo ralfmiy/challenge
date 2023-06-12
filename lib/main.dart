@@ -1,15 +1,12 @@
-import 'package:challenge/view/screens/login_screen.dart';
-import 'package:challenge/view/screens/product_detail_screen.dart';
-import 'package:challenge/view/screens/product_list_screen.dart';
-import 'package:challenge/view_model/login_view_model.dart';
-import 'package:challenge/view_model/media_view_model.dart';
-import 'package:challenge/view_model/product_detail_view_model.dart';
-import 'package:challenge/view_model/product_list_view_model.dart';
+import 'package:challenge/ui/view/login_view.dart';
+import 'package:challenge/ui/view/product_detail_view.dart';
+import 'package:challenge/ui/view/product_list_view.dart';
+import 'package:challenge/ui/view_model/login_view_model.dart';
+import 'package:challenge/ui/view_model/product_detail_view_model.dart';
+import 'package:challenge/ui/view_model/product_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import 'view/screens/home_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +24,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: MediaViewModel()),
         ChangeNotifierProvider.value(value: LoginViewModel()),
         ChangeNotifierProvider.value(value: ProductDetailViewModel()),
         ChangeNotifierProvider.value(value: ProductListViewModel()),
@@ -36,15 +32,28 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Media Player',
         theme: ThemeData(
-          appBarTheme: AppBarTheme(),
-          primaryColor: Colors.purple,
-          primarySwatch: Colors.purple,
-        ),
+            appBarTheme: const AppBarTheme(),
+            primaryColor: const Color(0xFF9E007E),
+            primarySwatch: const MaterialColor(0xFF9E007E, {
+      50: Color(0xFFF6E3F1),
+      100: Color(0xFFE3B8D9),
+      200: Color(0xFFD08CAC),
+      300: Color(0xFFBC5E7F),
+      400: Color(0xFFA82C61),
+      500: Color(0xFF9E007E),
+      600: Color(0xFF8E006F),
+      700: Color(0xFF7D005F),
+      800: Color(0xFF6C004F),
+      900: Color(0xFF5A003F),
+    }),),
         initialRoute: '/product_list',
         routes: {
-          '/login': (context) => LoginScreen(),
-          '/product_list': (context) => ProductListScreen(),
-          '/product_detail': (context) => ProductDetailScreen(),
+          '/login': (context) => const LoginScreen(),
+          '/product_list': (context) => const ProductListScreen(),
+          '/product_detail': (context) => ProductDetailScreen(
+                productArgs: (ModalRoute.of(context)!.settings.arguments
+                    as ProductDetailViewArgs),
+              ),
         },
       ),
     );

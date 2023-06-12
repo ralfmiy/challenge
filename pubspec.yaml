@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.1
   provider: ^5.0.0
   audioplayers: ^0.18.2
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

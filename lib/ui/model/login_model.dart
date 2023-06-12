@@ -37,12 +37,11 @@ class LoginModel {
         "password": password,
       };
 
-  BaseService _mediaService = MediaService();
+  BaseService _mediaService = Service();
 
   Future<LoginModel> postLogin() async {
-    dynamic response = await _mediaService.postResponse("auth/login",toJson());
-    LoginModel login =
-         LoginModel.fromJson(response);
+    dynamic response = await _mediaService.postResponse("auth/login", toJson());
+    LoginModel login = LoginModel.fromJson(response);
     return login;
   }
 }

@@ -1,8 +1,10 @@
-import 'package:challenge/model/login_model.dart';
-import 'package:challenge/view_model/login_view_model.dart';
+import 'package:challenge/ui/view_model/login_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:provider/provider.dart';
+
+import '../model/login_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -32,7 +34,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.grey,
                 ),
                 controller: usernameController,
-                onChanged: (value) {},
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^[a-zA-Z0-9]+'))
+                ],
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderSide:
@@ -51,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Colors.grey,
                 ),
                 controller: passwordController,
-                onChanged: (value) {},
+                obscureText: true,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                         borderSide:

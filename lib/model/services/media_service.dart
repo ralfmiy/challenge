@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 import 'package:http/http.dart' as http;
 
-class MediaService extends BaseService {
+class Service extends BaseService {
   @override
   Future getResponse(String url) async {
     dynamic responseJson;
@@ -23,7 +23,10 @@ class MediaService extends BaseService {
   Future postResponse(String url, Map<String, dynamic> body) async {
     dynamic responseJson;
     try {
-      final response = await http.post(Uri.parse(mediaBaseUrl + url), body: body,);
+      final response = await http.post(
+        Uri.parse(mediaBaseUrl + url),
+        body: body,
+      );
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
